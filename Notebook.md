@@ -22,4 +22,11 @@ Component density:
 
 
 Day 2:
+Changes to using the networkx library instead of numpy, tried to translate data_file using unix command instead but will
+continue with reading line for line and translate instead. 
+
+Log-representation of histogram node degree for better visibilty
+
+Running sample with 10^6 lines ok, but slow when going bigger, run tests to see which algorithm is slow
+
 
