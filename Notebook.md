@@ -28,5 +28,7 @@ continue with reading line for line and translate instead.
 Log-representation of histogram node degree for better visibilty
 
 Running sample with 10^6 lines ok, but slow when going bigger, run tests to see which algorithm is slow
+![image](https://github.com/supergurkan/Project_DA3018/assets/133381081/c1d4a6aa-f4aa-4376-a441-ff90bc5615a5)
+![image](https://github.com/supergurkan/Project_DA3018/assets/133381081/b956738f-7c24-4f43-b55f-f903ef363627)
 
 
