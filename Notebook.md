@@ -21,3 +21,5 @@ Component density:
 3. Generate a histogram or a table summarizing the distribution of component densities
 
 
+Day 2:
+
