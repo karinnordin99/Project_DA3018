@@ -1,84 +1,120 @@
 
 
-from collections import defaultdict
+import networkx as nx
 import numpy as np
 import matplotlib.pyplot as plt
 
-# data_file = '/Users/karin/DA3018/Projekt/Project_DA3018/sample100000.txt'
-data_file = '/Users/karin/DA3018/Projekt/Project_DA3018/Spruce_fingerprint_2017-03-10_16.48.olp.m4'
+# Create an empty graph
+graph = nx.Graph()
 
-# Create a mapping from string identifiers to integer identifiers
-id_mapping = {}
-next_id = 0
+def read_data(graph):
+    translation_dict = {}
+    
+    with open('samplemillion.txt', 'r') as file:
+        for line in file:
+            # Split the line into columns
+            columns = line.strip().split()
+    
+            # Extract relevant information from the columns
+            identifier1 = columns[0]
+            identifier2 = columns[1]
+            overlap_start1 = int(columns[5])
+            overlap_end1 = int(columns[6])
+            contig_length1 = int(columns[7])
+            overlap_start2 = int(columns[9])
+            overlap_end2 = int(columns[10])
+            contig_length2 = int(columns[11])
+    
+            # Translate identifiers if necessary
+            if identifier1 not in translation_dict:
+                translation_dict[identifier1] = len(translation_dict) + 1
+            if identifier2 not in translation_dict:
+                translation_dict[identifier2] = len(translation_dict) + 1
+    
+            # Get the translated identifiers
+            vertex1 = translation_dict[identifier1]
+            vertex2 = translation_dict[identifier2]
+            
+            if (overlap_end1 - overlap_start1 >= 1000) and (overlap_end2 - overlap_start2 >= 1000):
+            # Add the vertices and edge to the graph
+                graph.add_edge(vertex1, vertex2)
 
-# Create the adjacency list using a defaultdict
-graph = defaultdict(list)
 
-# Read the file line by line
-with open(data_file, 'r') as file:
-    for line in file:
-        row = line.strip().split()
-        v1, v2, _, _, _, _, start1, end1, _, _, start2, end2 = row
-        if v1 not in id_mapping:
-            id_mapping[v1] = next_id
-            next_id += 1
-        if v2 not in id_mapping:
-            id_mapping[v2] = next_id
-            next_id += 1
-        v1_id = id_mapping[v1]
-        v2_id = id_mapping[v2]
-        graph[v1_id].append((v2_id, start1, end1, start2, end2))
-        graph[v2_id].append((v1_id, start2, end2, start1, end1))
+# Count the number of components with at least three vertices
+def three_vertices(graph):
+    components = nx.connected_components(graph)
+    count = 0
+    for component in components:
+        if len(component) >= 3:
+            count += 1
+    return count
 
-node_degrees = [len(edges) for edges in graph.values()]
-degree_counts = np.bincount(node_degrees)
-degrees = np.nonzero(degree_counts)[0]
-degree_distribution = degree_counts[degrees] / len(node_degrees)
+def component_density(graph):
+        
+    components = nx.connected_components(graph)
+    densities = []
+    for component in components:
+        subgraph = graph.subgraph(component)
+        num_nodes = subgraph.number_of_nodes()
+        num_edges = subgraph.number_of_edges()
+        density = 0.0
+        if num_nodes > 1:
+            max_possible_edges = (num_nodes * (num_nodes - 1)) / 2  # Complete graph
+            density = num_edges / max_possible_edges
+        densities.append(density)
 
-# Reset variables for counting components
-visited = [False] * len(graph)
-component_count = 0
+    # Compute the component density distribution
+    density_distribution = {}
+    for density in densities:
+        if density in density_distribution:
+            density_distribution[density] += 1
+        else:
+            density_distribution[density] = 1
+    return density_distribution
+        
 
-def explore_component(node, component):
-    visited[node] = True
-    component.add(node)
-    for neighbor in graph[node]:
-        if not visited[neighbor[0]]:
-            explore_component(neighbor[0], component)
+def node_density(graph):
+    node_degrees = graph.degree()
+    
+    # Compute the node degree distribution
+    degree_distribution = {}
+    for node, degree in node_degrees:
+        if degree in degree_distribution:
+            degree_distribution[degree] += 1
+        else:
+            degree_distribution[degree] = 1
+    return degree_distribution
+
+# Driver code
+read_data(graph)
 
 # Compute the number of components with at least three vertices
-for node in graph:
-    if not visited[node]:
-        component = set()
-        explore_component(node, component)
-        if len(component) >= 3:
-            component_count += 1
+num_components = three_vertices(graph)
+print("Number of components with at least three vertices:", num_components)
 
-# Compute component density distribution
-component_densities = []
-for component in graph.values():
-    num_edges = len(component)
-    num_vertices = len(set([v for v, _, _, _, _ in component]))
-    if num_vertices < 2:
-        density = 0
-    else:
-        density = num_edges / (num_vertices * (num_vertices - 1) / 2)  # Number of possible edges in a complete graph
-    component_densities.append(density)
+# Compute the component density distribution
+component_densities = component_density(graph)
 
-# Plot the node degree distribution
-plt.figure()
-plt.bar(degrees, degree_distribution, width=1, edgecolor='black')
-plt.xlabel('Node Degree')
-plt.ylabel('Fraction of Nodes')
-plt.title('Node Degree Distribution')
+# Plot the histogram of component densities
+plt.hist(component_densities, bins=10, edgecolor='black')
+plt.xlabel("Density")
+plt.ylabel("Count")
+plt.title("Component Density Distribution")
 plt.show()
 
-# Print the number of components with at least three vertices
-print("Number of Components with at least three vertices:", component_count)
+# Compute the node degree distribution
+degree_distribution = node_density(graph)
 
-# Plot the component density distribution
-plt.figure()
-plt.hist(component_densities, bins=20, edgecolor='black')
-plt
+# Plot the histogram of node degrees
+degrees = list(degree_distribution.keys())
+counts = list(degree_distribution.values())
+
+plt.bar(degrees, counts)
+plt.xlabel("Degree")
+plt.ylabel("Count")
+plt.title("Node Degree Distribution")
+plt.yscale('log')  # Set logarithmic scale for the y-axis
+plt.show()
+
 
 
