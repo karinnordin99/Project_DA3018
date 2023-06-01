@@ -6,38 +6,26 @@ import matplotlib.pyplot as plt
 
 # Create an empty graph
 graph = nx.Graph()
-
 def read_data(graph):
-    translation_dict = {}
     
-    with open('samplemillion.txt', 'r') as file:
+    with open(data_file2, 'r') as file:
+        print("open")
         for line in file:
             # Split the line into columns
             columns = line.strip().split()
     
             # Extract relevant information from the columns
-            identifier1 = columns[0]
-            identifier2 = columns[1]
-            overlap_start1 = int(columns[5])
-            overlap_end1 = int(columns[6])
-            contig_length1 = int(columns[7])
-            overlap_start2 = int(columns[9])
-            overlap_end2 = int(columns[10])
-            contig_length2 = int(columns[11])
-    
-            # Translate identifiers if necessary
-            if identifier1 not in translation_dict:
-                translation_dict[identifier1] = len(translation_dict) + 1
-            if identifier2 not in translation_dict:
-                translation_dict[identifier2] = len(translation_dict) + 1
-    
-            # Get the translated identifiers
-            vertex1 = translation_dict[identifier1]
-            vertex2 = translation_dict[identifier2]
-            
-            if (overlap_end1 - overlap_start1 >= 1000) and (overlap_end2 - overlap_start2 >= 1000):
-            # Add the vertices and edge to the graph
-                graph.add_edge(vertex1, vertex2)
+            identifier1 = int(columns[0])
+            identifier2 = int(columns[1])
+            # overlap_start1 = int(columns[2])
+            # overlap_end1 = int(columns[3])
+            # contig_length1 = int(columns[4])
+            # overlap_start2 = int(columns[5])
+            # overlap_end2 = int(columns[6])
+            # contig_length2 = int(columns[7])
+
+            graph.add_edge(identifier1, identifier2)
+        print("graphed")
 
 
 # Count the number of components with at least three vertices
