@@ -35,5 +35,10 @@ Running sample with 10^6 lines ok, but slow when going bigger, run tests to see 
 # Day 3 
 Preprocessing the datafile with unix-commands and removing function that transalates and checks for >=1000
 Data file is now down from 7 GB to 2,75GB
+Rewritten the code today to Java instead of Python3
+
+# Day 4 
+Code in Python to transalte the data from the Java program to plot histograms
+
 
 
