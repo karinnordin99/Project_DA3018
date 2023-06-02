@@ -1,3 +1,7 @@
+#!/bin/sh
+
+# Author : Karin Nordin
+
 awk '
 BEGIN {
     idx = 1
