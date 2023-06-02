@@ -1,6 +1,12 @@
 #!/bin/sh
 
 # Author : Karin Nordin
+# Make sure the datafile Spruce_fingerprint_2017-03-10_16.48.olp.m4, projekt.java, histo_plot.py is in the same directory, then run
+
+# chmod -x translade_data.sh
+# sh translate_data.sh
+
+
 echo "This project has been applies to a smaller dataset, beginning by extracting a sampla from the given data with 1.000.000 lines"
 head -n 1000000 /Users/karin/DA3018/Projekt/Project_DA3018/Spruce_fingerprint_2017-03-10_16.48.olp.m4 > samplemillion.txt
 
