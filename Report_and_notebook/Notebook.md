@@ -63,6 +63,21 @@ Wrote python-program to "transalte" the data from the Java program to plot histo
 Debugging method "computeComponentDensity"; at line 100 the calculation of the density was badly implemented has been split up to numerator, denominator seperately. Also added if statement to check for zero division. Still the result is not probable with values outside the interval but more probable result, only a lot of components with density 0.
 
 # Day 5
+Continued debugging computeComponentDensity and tried a different approach using dfs earlier implemented instead of nestled loops. Also found that the method was not taking single-node components into consideration. Now result is within [0,1] and seems very realistic.  
+
+Combined the unix commands that have been used to preprocess the data with execution commands for the java program and the python plotting program into a shell script. Edited pathways to files in projekt.java and histo_plot.py to make a chain from 
+Preprocessing in unix -> Graph building and calculations in Java -> plotting histograms in Python3.
+
+Output in terminal running the shell script:
+
+This project has been applied to a smaller dataset, beginning by extracting a sample from the given data with 1.000.000 lines
+
+The sample has been translated, strings has been mapped to integers and only the contigs fulfilling the criterea n>=1000 are included
+
+Now running the java project...
+
+![image](https://github.com/supergurkan/Project_DA3018/assets/133381081/b3464422-6920-47c3-a326-6b16cc0ee06e)
+![image](https://github.com/supergurkan/Project_DA3018/assets/133381081/c56b3eed-0ee0-4319-b5c6-677480ed161b)
 
 
 
