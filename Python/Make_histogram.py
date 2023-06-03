@@ -6,11 +6,14 @@ Created on Thu Jun  1 17:17:40 2023
 @author: karin
 """
 
+# To run the program, please change the path to file to your working directory, do not change the filenames. 
+# Then follow instructions in translate_data.sh
+
 import matplotlib.pyplot as plt
 import math
 
-node_degrees_data_million = "/Users/karin/DA3018/Projekt/Run/node_density_million.txt"
-component_densities_data_million = "/Users/karin/DA3018/Projekt/Run/component_density_million.txt"
+node_degrees_data_million = "PATH_TO_FILE/node_density_million.txt"
+component_densities_data_million = "PATH_TO_FILE/component_density_million.txt"
 def plot_component_densities():
     
     with open(component_densities_data_million, 'r') as file:
