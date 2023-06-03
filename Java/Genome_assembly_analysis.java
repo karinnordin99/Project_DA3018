@@ -8,26 +8,23 @@ import java.util.*;
 
 public class projekt {
     public static void main(String[] args) {
-        Map<Integer, Set<Integer>> graph = new HashMap<>();
-        System.out.println("Before readin");
+        HashMap<Integer, Set<Integer>> graph = new HashMap<>();
         readData(graph);
 
         int numComponents = countComponents(graph);
         System.out.println("Number of components with at least three vertices: " + numComponents);
 
-        Map<Double, Integer> componentDensities = computeComponentDensity(graph);
+        HashMap<Double, Integer> componentDensities = computeComponentDensity(graph);
         System.out.println(componentDensities);
         
 
-        Map<Integer, Integer> degreeDistribution = computeNodeDensity(graph);
+        HashMap<Integer, Integer> degreeDistribution = computeNodeDensity(graph);
         System.out.println(degreeDistribution);
     }
 
-    private static void readData(Map<Integer, Set<Integer>> graph) {
-        String dataFile1 = "/Users/karin/DA3018/Projekt/Project_DA3018/translated_data_sample.txt";
-        String dataFile2 = "/Users/karin/DA3018/Projekt/Project_DA3018/sample_data_1_000_000.txt";
-        String dataFile3 = "/Users/karin/DA3018/Projekt/Project_DA3018/translated_data.txt";
-        try (BufferedReader br = new BufferedReader(new FileReader(dataFile2))) {
+    private static void readData(HashMap<Integer, Set<Integer>> graph) {
+        String dataFile1 = "/Users/karin/DA3018/Projekt/Project_DA3018/testrunning/translated_data_1_000_000.txt";
+        try (BufferedReader br = new BufferedReader(new FileReader(dataFile1))) {
             System.out.println("Reading data...");
             String line;
             while ((line = br.readLine()) != null) {
@@ -43,11 +40,9 @@ public class projekt {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        System.out.println("Data read and graph created.");
     }
 
-    private static void addEdge(Map<Integer, Set<Integer>> graph, int vertex1, int vertex2) {
+    private static void addEdge(HashMap<Integer, Set<Integer>> graph, int vertex1, int vertex2) {
         // Add vertex1 and vertex2 to the graph if they don't exist
         graph.putIfAbsent(vertex1, new HashSet<>());
         graph.putIfAbsent(vertex2, new HashSet<>());
@@ -56,12 +51,10 @@ public class projekt {
         graph.get(vertex1).add(vertex2);
         graph.get(vertex2).add(vertex1);
         
-        //HASHMAP FOR NODE, 
+        //HASHHashMap FOR NODE, 
     }
 
-    
-
-    private static int countComponents(Map<Integer, Set<Integer>> graph) {
+    private static int countComponents(HashMap<Integer, Set<Integer>> graph) {
         int count = 0;
         Set<Integer> visited = new HashSet<>();
 
@@ -78,7 +71,7 @@ public class projekt {
         return count;
     }
 
-    private static void dfs(Map<Integer, Set<Integer>> graph, int vertex, Set<Integer> component, Set<Integer> visited) {
+    private static void dfs(HashMap<Integer, Set<Integer>> graph, int vertex, Set<Integer> component, Set<Integer> visited) {
         visited.add(vertex);
         component.add(vertex);
 
@@ -88,29 +81,47 @@ public class projekt {
             }
         }
     }
+    
+    private static HashMap<Double, Integer> computeComponentDensity(HashMap<Integer, Set<Integer>> graph) {
+    	HashMap<Double, Integer> densityDistribution = new HashMap<>();
+    	Set<Integer> visited = new HashSet<>();
+    	
+    	for (int vertex : graph.keySet())
+    		if (!visited.contains(vertex)) {
+    			Set<Integer> component = new HashSet<>();
+    			dfs(graph, vertex, component, visited);
+    			
+    			int numNode = component.size();
+    			int numEdge = 0;
+    			for (int v : component) {
+                    numEdge += graph.getOrDefault(v, Collections.emptySet()).size();
+                }
+    			double density;
+    			
+    			if (numNode <= 1) {
+    				density = 0.0;
+    			}
+    			
+    			else {
+                numEdge = numEdge / 2;
+                
+                double numerator = 2 * numEdge;
+                double denominator = numNode * (numNode - 1);
+                
+                
+                density = (double) numerator / denominator;
+    			}
 
-    private static Map<Double, Integer> computeComponentDensity(Map<Integer, Set<Integer>> graph) {
-        Map<Double, Integer> densityDistribution = new HashMap<>();
-
-        for (Set<Integer> component : graph.values()) {
-            int numNodes = component.size();
-            int numEdges = 0;
-
-            for (int vertex : component) {
-                numEdges += graph.getOrDefault(vertex, Collections.emptySet()).size();
+                densityDistribution.put(density, densityDistribution.getOrDefault(density, 0) + 1);
             }
 
-            double maxPossibleEdges = numNodes * (numNodes - 1) / 2.0;
-            double density = maxPossibleEdges > 0 ? numEdges / maxPossibleEdges : 0.0;
-
-            densityDistribution.put(density, densityDistribution.getOrDefault(density, 0) + 1);
-        }
-
         return densityDistribution;
+    	
+    	
     }
-
-    private static Map<Integer, Integer> computeNodeDensity(Map<Integer, Set<Integer>> graph) {
-        Map<Integer, Integer> degreeDistribution = new HashMap<>();
+    
+    private static HashMap<Integer, Integer> computeNodeDensity(HashMap<Integer, Set<Integer>> graph) {
+        HashMap<Integer, Integer> degreeDistribution = new HashMap<>();
 
         for (Set<Integer> component : graph.values()) {
             int degree = component.size();
@@ -119,7 +130,12 @@ public class projekt {
 
         return degreeDistribution;
     }
+    
+
+    
 
 }
+
+
 
 
