@@ -1,7 +1,7 @@
 
 # Report
 ### Karin Nordin
-### date: 2023-06-01
+### 2023-06-01
 
 ## Introduction
 In this project an analysis of a genome assembly graph has been made. The graph consists of vertices representing DNA segments and edges representing similarities between two vertices. The assignment provided was to report the three following results;
