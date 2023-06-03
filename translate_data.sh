@@ -40,7 +40,7 @@ java projekt.java > result_million.txt
 touch component_density_million.txt
 touch node_density_million.txt
 
-head -n 4 result_million.txt > component_density_million.txt
-head -n 5 result_million.txt > node_density_million.txt
+head -n 4 result_million.txt | tail -1 > component_density_million.txt
+head -n 5 result_million.txt | tail -1 > node_density_million.txt
 
 Python3 histo_plot.py 
