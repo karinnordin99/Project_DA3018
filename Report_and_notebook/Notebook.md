@@ -34,19 +34,35 @@ Data file is now down from 7 GB to 2,75GB
 
 Started to translate the code from Python3 to Java;
 Chosen to use HashMap datastructure for storing the graph with Integers for vertices and Set for components. 
+
 Implemented a method to add edge to graph using the built in function putIfAbsent() and get()
-Implemented a method for reading the file using a buffered reader that adds edges using the method addEdge(graph, identifier1, identifier2)
-Implemented the DFS-algorthm using recursion and the method to count number of components with at least 3 vertices. Identified the connected components and used a simple for loop and a count for the result. 
+input: graph (HashMap), vertex1 (int), vertex2 (int)
+output: no output
+
+Implemented a method for reading the file using a buffered reader that adds edges using the method addEdge
+input: graph
+output: no outout except for string verifying graph has been built
+
+Implemented the DFS-algorthm using recursion
+input: graph (HashMap), vertex (int), component (Set), visited (Set)
+output: no output
+
+Implemented the method to count number of components with at least 3 vertices. Used a for loop to identify connected components and the the dfs method to count number of components with >3 vertices.
+input: graph (HashMap)
+output: number of components with >3 vertices (int)
 
 # Day 4 
-Implemented the method for computing node degree distribution. Used a for loop for  Chose to store the result in an HashMap
+Implemented the method for computing node degree distribution. Used a for loop to iterate over the component and calculated the degree
+input: graph (HashMap)
+output: degreeDistribution (HashMap)
 
+Tried implementing the method to calculate the component density but yielded unrealistic data with result well outside the interval [0,1] and a great amount of the data had density 0.
 
+Wrote python-program to "transalte" the data from the Java program to plot histograms. That is making 2 lists, one with keys and one with values using replace("{",""), split() etc. and converting the strings that java program outputs in txt-file to int/float.
 
-Wrote python-program to "transalte" the data from the Java program to plot histograms. That is making 2 lists, one with keys and one with values
-and converting the strings that java program outputs in txt-file to int/float
-Debugging method "computeComponentDensity" that was returning alarming amount of components with density 0, bug was at line 100 where
-the calculation of the density was badly implemented
+Debugging method "computeComponentDensity"; at line 100 the calculation of the density was badly implemented has been split up to numerator, denominator seperately. Also added if statement to check for zero division. Still the result is not probable with values outside the interval but more probable result, only a lot of components with density 0.
+
+# Day 5
 
 
 
