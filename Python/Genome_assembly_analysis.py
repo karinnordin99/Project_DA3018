@@ -6,6 +6,13 @@ Created on Wed May 31 17:37:50 2023
 @author: karin
 """
 
+"""
+This program was implemented "by misstake" due to not reading the description of the assignment properly.
+The program has not been tested thoroughly and is free standing from the rest of the project. All results presented in 
+the report are results from the Java program in the folder "Java". 
+It is kept in the same repository only for eventual future reference.
+"""
+
 import networkx as nx
 import numpy as np
 import matplotlib.pyplot as plt
