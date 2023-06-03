@@ -1,3 +1,5 @@
+//Please make sure to change the file path before running the program but let the file name stay "translated_data_1_000_000.txt"
+
 package projekt;
 
 import java.io.BufferedReader;
@@ -23,7 +25,7 @@ public class projekt {
     }
 
     private static void readData(HashMap<Integer, Set<Integer>> graph) {
-        String dataFile1 = "/Users/karin/DA3018/Projekt/Run/translated_data_1_000_000.txt";
+        String dataFile1 = "FILEPATH/translated_data_1_000_000.txt";
         try (BufferedReader br = new BufferedReader(new FileReader(dataFile1))) {
             System.out.println("Reading data...");
             String line;
