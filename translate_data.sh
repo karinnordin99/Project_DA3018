@@ -1,18 +1,21 @@
 #!/bin/sh
 
 # Author : Karin Nordin
-# Make sure the datafile Spruce_fingerprint_2017-03-10_16.48.olp.m4, projekt.java, histo_plot.py is in the same directory, then run
+# Make sure the datafile Spruce_fingerprint_2017-03-10_16.48.olp.m4, projekt.java, histo_plot.py is in the same directory
+# and change the path_to_file to your directory you are working in, this path to file has to be changed in both the shell script,
+# in the java file projekt.java and in the python file histo_plot.py. 
 
 # chmod -x translade_data.sh
 # sh translate_data.sh
 
 
-echo "This project has been applies to a smaller dataset, beginning by extracting a sampla from the given data with 1.000.000 lines"
+echo "This project has been applied to a smaller dataset, beginning by extracting a sample from the given data with 1.000.000 lines"
+echo
 
 touch samplemillion.txt
 touch translated_data_1_000_000.txt
 
-head -n 1000000 /Users/karin/DA3018/Projekt/Run/Spruce_fingerprint_2017-03-10_16.48.olp.m4 > samplemillion.txt
+head -n 1000000 /PATH_TO_FILE/Spruce_fingerprint_2017-03-10_16.48.olp.m4 > samplemillion.txt
 
 awk '
 BEGIN {
@@ -31,6 +34,7 @@ $7 - $6 + 1 >= 1000 && $11 - $10 + 1 >= 1000 {
 }
 ' samplemillion.txt > translated_data_1_000_000.txt
 echo "The sample has been translated, strings has been mapped to integers and only the contigs fulfilling the criterea n>=1000 are included"
+echo
 echo "Now running the java project"
 
 touch result_million.txt
