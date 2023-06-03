@@ -24,8 +24,6 @@ Component density:
 # Day 2:
 Changes to using the networkx library instead of numpy, implemented translation of data file using Unix commands
 
-Log-representation of histogram node degree for better visibilty
-
 Running sample with 10^6 lines ok, but slow when going bigger, run tests to see which algorithm is slow
 ![image](https://github.com/supergurkan/Project_DA3018/assets/133381081/c1d4a6aa-f4aa-4376-a441-ff90bc5615a5)
 ![image](https://github.com/supergurkan/Project_DA3018/assets/133381081/b956738f-7c24-4f43-b55f-f903ef363627)
@@ -33,9 +31,18 @@ Running sample with 10^6 lines ok, but slow when going bigger, run tests to see 
 # Day 3 
 removed function that transalates and checks for >=1000 in java program in favor of Unix commands
 Data file is now down from 7 GB to 2,75GB
-Rewritten the code today to Java instead of Python3
+
+Started to translate the code from Python3 to Java;
+Chosen to use HashMap datastructure for storing the graph with Integers for vertices and Set for components. 
+Implemented a method to add edge to graph using the built in function putIfAbsent() and get()
+Implemented a method for reading the file using a buffered reader that adds edges using the method addEdge(graph, identifier1, identifier2)
+Implemented the DFS-algorthm using recursion and the method to count number of components with at least 3 vertices. Identified the connected components and used a simple for loop and a count for the result. 
 
 # Day 4 
+Implemented the method for computing node degree distribution. Used a for loop for  Chose to store the result in an HashMap
+
+
+
 Wrote python-program to "transalte" the data from the Java program to plot histograms. That is making 2 lists, one with keys and one with values
 and converting the strings that java program outputs in txt-file to int/float
 Debugging method "computeComponentDensity" that was returning alarming amount of components with density 0, bug was at line 100 where
