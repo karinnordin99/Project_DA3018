@@ -28,12 +28,15 @@ $7 - $6 + 1 >= 1000 && $11 - $10 + 1 >= 1000 {
 ' samplemillion.txt > "$translated_data_1_000_000.txt"
 echo "The sample has been translated, strings has been mapped to integers and only the contigs fulfilling the criterea n>=1000 are included"
 echo "Now running the java project"
-java projekt.java > translated_data_1_000_000.txt
+
+touch result_million.txt
+
+java projekt.java > result_million.txt
 
 touch component_density_million.txt
 touch node_density_million.txt
 
-head -4 component_density_million.txt
-head -5 node_density_million.txt
+head -n 4 result_million.txt > component_density_million.txt
+head -n 5 result_million.txt > node_density_million.txt
 
 Python3 histo_plot.py 
