@@ -38,7 +38,7 @@ The method reads the file line by line so the time complexity is $O(n)$, the met
 
 #### Count compoonents
 
-Iterating over the vertices in the graph is $O(|V|)$, the time complexity for dfs is $O(|V|+|E|)$. So in total the time complexity is $O(|V|(|V|+|E|))=O(|V|^2+|V||E|)$. Analysing the space complexity in the worst case, we see that the set "visited" is $O(|V|)$ and "component" set is $O(C)$ where C is the largest component.  
+Iterating over the vertices in the graph is $O(|V|)$, the time complexity for dfs is $O(|V|+|E|)$. So in total the time complexity is $O(|V|(|V|+|E|))=O(|V|^2+|V||E|)$. Analysing the space complexity in the worst case, we see that the set "visited" is $O(|V|)$ and "component" set is $O(C)$ where $C$ is the largest component.  
 
 #### Component density
 
