@@ -42,11 +42,15 @@ Iterating over the vertices in the graph is $O(|V|)$, the time complexity for df
 
 #### Component density
 
-The first iteration is over all components in the graph, so the time complexity is $O(V)$ for the worst case scenario, the iteration over each vertex in every component is $O(V)$, so in total the time complexity is $O(V^2)$. For space complexity, the variables "numEdges", "numNodes", "denominator" and numerator all require constants space. In the worst case, where HashMap "densityDistribution" stores all vertices forms a single components and all vertices has uniqe density, the space complexity is $O(V)$. 
+The first iteration is over all components in the graph, so the time complexity is $O(|V|)$ for the worst case scenario, the iteration over each vertex in every component is $O(|V|)$, so in total the time complexity is $O(|V|^2)$. For space complexity, the variables "numEdges", "numNodes", "denominator" and numerator all require constants space. In the worst case, where HashMap "densityDistribution" stores all vertices forms a single components and all vertices has uniqe density, the space complexity is $O(|V|)$. 
 
 #### Node density
 
-Both retrieving and updating the size of "degreeDistribution" is constant. The loop iterates over all components, which yields a time complexity of $O(V)$. The space complexity is dependent on the size of degreeDistribution, let D be the number of distinct degrees, then the space complexity is $O(D)$.
+Both retrieving and updating the size of "degreeDistribution" is constant. The loop iterates over all components, which yields a time complexity of $O(|V|)$. The space complexity is dependent on the size of degreeDistribution, let $D$ be the number of distinct degrees, then the space complexity is $O(D)$.
+  
+### Conclusions
+
+Based on my analysis for the time and space complexity of the diffrent methods, I suspect that the issue is with running the full data set is caused because unoptimized methods when it comes to time complexity. The space complexity seems to be as good as one could hope, but minor optimizations are always possible.
 
 ## Results 
 
@@ -58,6 +62,3 @@ For sample of $10^6$ lines from the full data file, the number of components wit
 In Fig.1 a histogram over the node degree distribution with degree on the x-axis and number of components with that degre on the y-axis. 
 In Fig.2 a histogram over the component density distribution with density on the x-axis and number of components on the y-axis. 
 
-## Conclusions
-
-Based on my analysis for the time and space complexity of the diffrent methods, i suspect that the methods countComponents and computeComponentDensity are the issues when trying to run the program on the full data set. 
