@@ -33,12 +33,12 @@ The method takes the graph in form of a map as input and returns a hashmap with 
 
 #### Reading the data
 
-The method reads the file line by line so the time complexity is $O(n)$, the method then calls addEdge(graph, identifier1, identifier2) that is constant, that is $O(1)$. In conlcustion the method takes $O(E)$. In the data structure for the graph, each vertex is a key assoicated with the adjacent vertices, the values. The memory required is proportional to the sum of vertices ($V$) and edges ($E$). Therefore the spacecomplexity is $O(E+V)$ 
+The method reads the file line by line so the time complexity is $O(n)$, the method then calls addEdge(graph, identifier1, identifier2) that is constant, that is $O(1)$. In conlcustion the method takes $O(n)$. In the data structure for the graph, each vertex is a key assoicated with the adjacent vertices, the values. The memory required is proportional to the sum of vertices ($V$) and edges ($E$). Therefore the spacecomplexity is $O(|E|+|V|)$ 
 
 
 #### Count compoonents
 
-Iterating over the vertices in the graph is $O(V)$, the time complexity for dfs is $O(V+E)$. So in total the time complexity is $O(V(V+E))$. In most cases the number of vertices is dominant over the number of edges, so the time complexity can be approximated by $O(V^2)$. Analysing the space complexity we see that the set "visited" is $O(V)$, "component" set is $O(V)$ and 
+Iterating over the vertices in the graph is $O(|V|)$, the time complexity for dfs is $O(|V|+|E|)$. So in total the time complexity is $O(|V|(|V|+|E|))=O(|V|^2+|V||E|)$. Analysing the space complexity in the worst case, we see that the set "visited" is $O(|V|)$ and "component" set is $O(C)$ where C is the largest component.  
 
 #### Component density
 
@@ -46,7 +46,7 @@ The first iteration is over all components in the graph, so the time complexity 
 
 #### Node density
 
-Both retrieving and updating the size of "degreeDistribution" is constant. The loop iterates over all components, which yields a time complexity of $O(V)$. The space complexity is, with the same argument as for the component density, $O(V)$.
+Both retrieving and updating the size of "degreeDistribution" is constant. The loop iterates over all components, which yields a time complexity of $O(V)$. The space complexity is dependent on the size of degreeDistribution, let D be the number of distinct degrees, then the space complexity is $O(D)$.
 
 ## Results 
 
